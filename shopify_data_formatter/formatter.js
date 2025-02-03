@@ -40,6 +40,7 @@ export const shopify_formatter = async () => {
   prods.map((e) => {
 
     formatted_data.push({
+      
       "Handle": add_hyphens(style_map[e.styleID].title),
       "Title": style_map[e.styleID].title,
       "BrandName": e.brandName,
@@ -56,18 +57,23 @@ export const shopify_formatter = async () => {
       "Variant Inventory": e.qty,
       "Variant Inventory Policy": 'deny',
       "Variant Image": set_image(e),
-      "Status" : 'active'
+      "Status": 'active'
     });
   });
 
   fs.writeFile('Products.csv', converter.json2csv(formatted_data), (err) => {
     if (err) throw err;
   });
+
+  fs.writeFile('Products.json', JSON.stringify(formatted_data), (err) => {
+    if (err) throw err;
+  }); 
 };
 
-const add_hyphens = (str) => { return str.trim().replace(/\s+/g,'-').toLowerCase(); };
+const add_hyphens = (str) => {return str.trim().replace(/\s+/g,'-').toLowerCase()};
 
 const set_image = (obj) => {
+
   let image_src = [];
 
   if (obj.colorFrontImage) image_src.push(obj.colorFrontImage);
@@ -90,9 +96,7 @@ const set_image = (obj) => {
 const styles_map = (arr) => {
   const sMap = {};
 
-  arr.map((e) => {
-    sMap[e.styleID] = e;
-  });
+  arr.map((e) => {sMap[e.styleID] = e;});
 
   return sMap;
 };
