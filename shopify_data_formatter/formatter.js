@@ -40,7 +40,6 @@ export const shopify_formatter = async () => {
   prods.map((e) => {
 
     formatted_data.push({
-      
       "Handle": add_hyphens(style_map[e.styleID].title),
       "Title": style_map[e.styleID].title,
       "BrandName": e.brandName,
