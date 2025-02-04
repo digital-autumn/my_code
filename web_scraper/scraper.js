@@ -2,9 +2,7 @@ import * as cheerio from 'cheerio';
 import * as converter from 'json-2-csv';
 import fs from 'fs';
 
-const priceFormatter = (str) => {
-   return str.substring(str.length-8, str.length).replace('^0+', '');
-};
+const priceFormatter = (str) => {return str.substring(str.length-8, str.length).replace('^0+', '');};
 
 export const getData = async (url) => {
 
