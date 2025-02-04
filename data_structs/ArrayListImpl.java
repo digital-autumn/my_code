@@ -26,6 +26,7 @@ public class ArrayListImpl <T> implements IList <T>{
     public void clear() {
         for (int i = 0; i < size; i++)
             list[i] = null;
+        size = 0;
     }
 
     @Override
