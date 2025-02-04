@@ -78,6 +78,7 @@ public class LinkedListImpl <T> implements IList <T>{
     public void clear() {
         head = null;
         tail = null;
+        size = 0;
     }
 
     @Override
