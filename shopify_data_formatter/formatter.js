@@ -73,24 +73,15 @@ export const shopify_formatter = async () => {
 const add_hyphens = (str) => {return str.trim().replace(/\s+/g,'-').toLowerCase()};
 
 const set_images = (obj) => {
-
-  let image_src = [];
-
-  if (obj.colorFrontImage) image_src.push(urls.activewear_url+obj.colorFrontImage);
-
-  if (obj.colorBackImage) image_src.push(urls.activewear_url+obj.colorBackImage);
-
-  if (obj.colorSideImage) image_src.push(urls.activewear_url+obj.colorSideImage);
-  
-  if (obj.colorDirectSideImage) image_src.push(urls.activewear_url+obj.colorDirectSideImage);
-
-  if (obj.colorOnModelFrontImage) image_src.push(urls.activewear_url+obj.colorOnModelFrontImage);
-
-  if (obj.colorOnModelSideImage) image_src.push(urls.activewear_url+obj.colorOnModelSideImage);
-
-  if (obj.colorOnModelBackImage) image_src.push(urls.activewear_url+obj.colorOnModelBackImage);
-
-  return image_src;
+  return {
+   "Front Image": urls.activewear_url+obj.colorFrontImage,
+   "Back Image": urls.activewear_url+obj.colorBackImage,
+   "Side Image": urls.activewear_url+obj.colorSideImage,
+   "Direct Side Image": urls.activewear_url+obj.colorDirectSideImage,
+   "Model Front Image": urls.activewear_url+obj.colorOnModelFrontImage,
+   "Model Side Image": urls.activewear_url+obj.colorOnModelSideImage,
+   "Model Back Image": urls.activewear_url+obj.colorOnModelBackImage
+  };
 };
 
 const styles_map = (arr) => {
