@@ -1,5 +1,5 @@
 import * as converter from 'json-2-csv';
-import * as url from '../helpers/urls.js';
+import * as urls from '../helpers/urls.js';
 import * as consts_vars from '../env/constants.js'; 
 import * as env_creds from '../env/env_creds.js';
 import fs from 'fs';
@@ -31,8 +31,8 @@ const getData = async (url) => {
 
 export const shopify_formatter = async () => {
   
-  const prods = await getData(url.all_prods);
-  const styles = await getData(url.all_styles);
+  const prods = await getData(urls.all_prods);
+  const styles = await getData(urls.all_styles);
   const style_map = styles_map(styles);
 
   const formatted_data = [];
@@ -40,6 +40,7 @@ export const shopify_formatter = async () => {
   prods.map((e) => {
 
     formatted_data.push({
+      
       "Handle": add_hyphens(style_map[e.styleID].title),
       "Title": style_map[e.styleID].title,
       "BrandName": e.brandName,
@@ -75,19 +76,19 @@ const set_image = (obj) => {
 
   let image_src = [];
 
-  if (obj.colorFrontImage) image_src.push(obj.colorFrontImage);
+  if (obj.colorFrontImage) image_src.push(urls.activewear_url+obj.colorFrontImage);
 
-  if (obj.colorBackImage) image_src.push(obj.colorBackImage);
+  if (obj.colorBackImage) image_src.push(urls.activewear_url+obj.colorBackImage);
 
-  if (obj.colorSideImage) image_src.push(obj.colorSideImage);
+  if (obj.colorSideImage) image_src.push(urls.activewear_url+obj.colorSideImage);
   
-  if (obj.colorDirectSideImage) image_src.push(obj.colorDirectSideImage);
+  if (obj.colorDirectSideImage) image_src.push(urls.activewear_url+obj.colorDirectSideImage);
 
-  if (obj.colorOnModelFrontImage) image_src.push(obj.colorOnModelFrontImage);
+  if (obj.colorOnModelFrontImage) image_src.push(urls.activewear_url+obj.colorOnModelFrontImage);
 
-  if (obj.colorOnModelSideImage) image_src.push(obj.colorOnModelSideImage);
+  if (obj.colorOnModelSideImage) image_src.push(urls.activewear_url+obj.colorOnModelSideImage);
 
-  if (obj.colorOnModelBackImage) image_src.push(obj.colorOnModelBackImage);
+  if (obj.colorOnModelBackImage) image_src.push(urls.activewear_url+obj.colorOnModelBackImage);
 
   return image_src;
 };
