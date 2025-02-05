@@ -56,7 +56,7 @@ export const shopify_formatter = async () => {
       "Variant Weight Unit": 'g',
       "Variant Inventory": e.qty,
       "Variant Inventory Policy": 'deny',
-      "Variant Image": set_image(e),
+      "Variant Image": set_images(e),
       "Status": 'active'
     });
   });
@@ -72,7 +72,7 @@ export const shopify_formatter = async () => {
 
 const add_hyphens = (str) => {return str.trim().replace(/\s+/g,'-').toLowerCase()};
 
-const set_image = (obj) => {
+const set_images = (obj) => {
 
   let image_src = [];
 
@@ -100,4 +100,3 @@ const styles_map = (arr) => {
 
   return sMap;
 };
-
