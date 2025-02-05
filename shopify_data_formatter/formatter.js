@@ -36,9 +36,7 @@ export const shopify_formatter = async () => {
   const formatted_data = [];
 
   prods.map((e) => {
-
     formatted_data.push({
-      
       "Handle": add_hyphens(style_map[e.styleID].title),
       "Title": style_map[e.styleID].title,
       "BrandName": e.brandName,
@@ -67,6 +65,7 @@ export const shopify_formatter = async () => {
 const add_hyphens = (str) => {return str.trim().replace(/\s+/g,'-').toLowerCase()};
 
 const set_images = (obj) => {
+
   return {
    "Front Image": urls.activewear_url+obj.colorFrontImage,
    "Back Image": urls.activewear_url+obj.colorBackImage,
@@ -79,8 +78,8 @@ const set_images = (obj) => {
 };
 
 const styles_map = (arr) => {
-  const sMap = {};
 
+  const sMap = {};
   arr.map((e) => {sMap[e.styleID] = e;});
 
   return sMap;
