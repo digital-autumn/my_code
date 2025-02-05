@@ -19,10 +19,8 @@ const getData = async (url) => {
         mode: 'cors',
         cache: 'default'
       });
-
-      const data = await response.json();
       
-      return data;
+      return await response.json();
 
   } catch (error) {
     console.error(error);
