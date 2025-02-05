@@ -59,13 +59,9 @@ export const shopify_formatter = async () => {
     });
   });
 
-  fs.writeFile('Products.csv', converter.json2csv(formatted_data), (err) => {
-    if (err) throw err;
-  });
+  fs.writeFile('Products.csv', converter.json2csv(formatted_data), (err) => {if (err) throw err;});
 
-  fs.writeFile('Products.json', JSON.stringify(formatted_data), (err) => {
-    if (err) throw err;
-  }); 
+  fs.writeFile('Products.json', JSON.stringify(formatted_data), (err) => {if (err) throw err;}); 
 };
 
 const add_hyphens = (str) => {return str.trim().replace(/\s+/g,'-').toLowerCase()};
