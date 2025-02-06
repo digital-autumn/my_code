@@ -32,13 +32,9 @@ export const getData = async (url) => {
       numProds = i;
    });
    
-   fs.appendFile('e_commerce_data.json', JSON.stringify(data), (err) => {
-      if (err) throw err;
-   });
+   fs.appendFile('e_commerce_data.json', JSON.stringify(data), (err) => {if (err) throw err;});
 
-   fs.appendFile('e_commerce_data.csv', converter.json2csv(data), (err) => {
-      if (err) throw err;
-   });
+   fs.appendFile('e_commerce_data.csv', converter.json2csv(data), (err) => {if (err) throw err;});
 
    console.log(numProds);
   }
