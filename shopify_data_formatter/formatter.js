@@ -38,22 +38,36 @@ export const shopify_formatter = async () => {
   prods.map((e) => {
     formatted_data.push({
       "Handle": add_hyphens(style_map[e.styleID].title),
-      "Title": style_map[e.styleID].title,
-      "BrandName": e.brandName,
-      "Body": style_map[e.styleID].description,
       "Vendor": consts_vars.VENDOR_NAME,
-      "Product Category": "Apparel & Accessories"+" > "+"Clothing Accessories"+" > "+style_map[e.styleID].baseCategory,
+      "Published": true,
       "Option1 Name": e.color1,
       "Option1 Value": e.colorName,
-      "Published": 'true',
-      "Variant Price": Math.trunc(((e.piecePrice * .50) + e.piecePrice) + 8) + .99,
-      "Variant SKU": e.sku,
-      "Variant Weight": Math.trunc(e.unitWeight * 1000),
-      "Variant Weight Unit": 'g',
+      "Variant Grams": Math.trunc(e.unitWeight * 1000),
       "Variant Inventory": e.qty,
       "Variant Inventory Policy": 'deny',
-      "Variant Image": set_images(e),
-      "Status": 'active'
+      "Variant Fulfillment Service": 'manual',
+      "Variant Price": Math.trunc(((e.piecePrice * .50) + e.piecePrice) + 8) + .99,
+      "Variant Requires Shipping": true,
+      "Variant Taxable": true,
+      "Gift Card": false,
+      "Variant Weight Unit": 'g',
+      "Included / [Primary]": false,
+      "Included / International": false,
+      "Status": 'active',
+      "Title": style_map[e.styleID].title,
+      "Body (HTML)": style_map[e.styleID].description,
+      "Product Category": "Apparel & Accessories"+" > "+"Clothing Accessories"+" > "+style_map[e.styleID].baseCategory,
+      "Variant SKU": e.sku,
+      "Image Src": urls.activewear_url+e.colorFrontImage,
+      "Variant Image": {
+        "Back Image": urls.activewear_url+e.colorBackImage,
+        "Side Image": urls.activewear_url+e.colorSideImage,
+        "Direct Side Image": urls.activewear_url+e.colorDirectSideImage,
+        "Model Front Image": urls.activewear_url+e.colorOnModelFrontImage,
+        "Model Side Image": urls.activewear_url+e.colorOnModelSideImage,
+        "Model Back Image": urls.activewear_url+e.colorOnModelBackImage
+      },
+      "Brand Name": e.brandName
     });
   });
 
@@ -63,19 +77,6 @@ export const shopify_formatter = async () => {
 };
 
 const add_hyphens = (str) => {return str.trim().replace(/\s+/g,'-').toLowerCase()};
-
-const set_images = (obj) => {
-
-  return {
-   "Front Image": urls.activewear_url+obj.colorFrontImage,
-   "Back Image": urls.activewear_url+obj.colorBackImage,
-   "Side Image": urls.activewear_url+obj.colorSideImage,
-   "Direct Side Image": urls.activewear_url+obj.colorDirectSideImage,
-   "Model Front Image": urls.activewear_url+obj.colorOnModelFrontImage,
-   "Model Side Image": urls.activewear_url+obj.colorOnModelSideImage,
-   "Model Back Image": urls.activewear_url+obj.colorOnModelBackImage
-  };
-};
 
 const styles_map = (arr) => {
 
