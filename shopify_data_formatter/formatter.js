@@ -1,36 +1,14 @@
 import * as converter from 'json-2-csv';
-import * as urls from '../helpers/urls.js';
-import * as consts_vars from '../env/constants.js'; 
-import * as env_creds from '../env/env_creds.js';
+import { API_USERNAME, API_KEY } from '../env/env.js';
+import { VENDOR_NAME } from '../helpers/constants.js'; 
+import { getData } from './request.js';
+import { all_prods, all_styles, activewear_url } from '../helpers/urls.js';
 import fs from 'fs';
-
-const getData = async (url) => {
-
-  const auth = 'Basic '+btoa(`${env_creds.API_USERNAME}:${env_creds.API_KEY}`);
-  
-  try {
-    const response = await fetch(url, 
-      { 
-        method: 'get',
-        headers: {
-          'Authorization': auth,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        mode: 'cors',
-        cache: 'default'
-      });
-      
-      return await response.json();
-
-  } catch (error) {
-    console.error(error);
-  };
-};
 
 export const shopify_formatter = async () => {
   
-  const prods = await getData(urls.all_prods);
-  const styles = await getData(urls.all_styles);
+  const prods = await getData(all_prods, API_USERNAME, API_KEY);
+  const styles = await getData(all_styles, API_USERNAME, API_KEY);
   const style_map = styles_map(styles);
 
   const formatted_data = [];
@@ -38,7 +16,7 @@ export const shopify_formatter = async () => {
   prods.map((e) => {
     formatted_data.push({
       "Handle": add_hyphens(style_map[e.styleID].title),
-      "Vendor": consts_vars.VENDOR_NAME,
+      "Vendor": VENDOR_NAME,
       "Published": true,
       "Option1 Name": e.color1,
       "Option1 Value": e.colorName,
@@ -58,22 +36,22 @@ export const shopify_formatter = async () => {
       "Body (HTML)": style_map[e.styleID].description,
       "Product Category": "Apparel & Accessories"+" > "+"Clothing Accessories"+" > "+style_map[e.styleID].baseCategory,
       "Variant SKU": e.sku,
-      "Image Src": urls.activewear_url+e.colorFrontImage,
+      "Image Src": activewear_url+e.colorFrontImage,
       "Variant Image": {
-        "Back Image": urls.activewear_url+e.colorBackImage,
-        "Side Image": urls.activewear_url+e.colorSideImage,
-        "Direct Side Image": urls.activewear_url+e.colorDirectSideImage,
-        "Model Front Image": urls.activewear_url+e.colorOnModelFrontImage,
-        "Model Side Image": urls.activewear_url+e.colorOnModelSideImage,
-        "Model Back Image": urls.activewear_url+e.colorOnModelBackImage
+        "Back Image": activewear_url+e.colorBackImage,
+        "Side Image": activewear_url+e.colorSideImage,
+        "Direct Side Image": activewear_url+e.colorDirectSideImage,
+        "Model Front Image": activewear_url+e.colorOnModelFrontImage,
+        "Model Side Image": activewear_url+e.colorOnModelSideImage,
+        "Model Back Image": activewear_url+e.colorOnModelBackImage
       },
       "Brand Name": e.brandName
     });
   });
 
-  fs.writeFile('Products.csv', converter.json2csv(formatted_data), (err) => {if (err) throw err;});
+  fs.writeFile('./exports/Products.csv', converter.json2csv(formatted_data), (err) => {if (err) throw err;});
 
-  fs.writeFile('Products.json', JSON.stringify(formatted_data), (err) => {if (err) throw err;}); 
+  fs.writeFile('./exports/Products.json', JSON.stringify(formatted_data), (err) => {if (err) throw err;}); 
 };
 
 const add_hyphens = (str) => {return str.trim().replace(/\s+/g,'-').toLowerCase()};
