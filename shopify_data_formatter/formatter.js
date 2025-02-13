@@ -1,14 +1,13 @@
 import * as converter from 'json-2-csv';
 import { API_USERNAME, API_KEY } from '../env/env.js';
-import { VENDOR_NAME } from '../helpers/constants.js'; 
+import { VENDOR_NAME, PRODUCTS, STYLES, WHOLESALER_URL } from '../helpers/constants.js'; 
 import { getData } from './request.js';
-import { all_prods, all_styles, activewear_url } from '../helpers/urls.js';
 import fs from 'fs';
 
 export const shopify_formatter = async () => {
   
-  const prods = await getData(all_prods, API_USERNAME, API_KEY);
-  const styles = await getData(all_styles, API_USERNAME, API_KEY);
+  const prods = await getData(PRODUCTS, API_USERNAME, API_KEY);
+  const styles = await getData(STYLES, API_USERNAME, API_KEY);
   const style_map = styles_map(styles);
 
   const formatted_data = [];
@@ -36,14 +35,14 @@ export const shopify_formatter = async () => {
       "Body (HTML)": style_map[e.styleID].description,
       "Product Category": "Apparel & Accessories"+" > "+"Clothing Accessories"+" > "+style_map[e.styleID].baseCategory,
       "Variant SKU": e.sku,
-      "Image Src": activewear_url+e.colorFrontImage,
+      "Image Src": WHOLESALER_URL+e.colorFrontImage,
       "Variant Image": {
-        "Back Image": activewear_url+e.colorBackImage,
-        "Side Image": activewear_url+e.colorSideImage,
-        "Direct Side Image": activewear_url+e.colorDirectSideImage,
-        "Model Front Image": activewear_url+e.colorOnModelFrontImage,
-        "Model Side Image": activewear_url+e.colorOnModelSideImage,
-        "Model Back Image": activewear_url+e.colorOnModelBackImage
+        "Back Image": WHOLESALER_URL+e.colorBackImage,
+        "Side Image": WHOLESALER_URL+e.colorSideImage,
+        "Direct Side Image": WHOLESALER_URL+e.colorDirectSideImage,
+        "Model Front Image": WHOLESALER_URL+e.colorOnModelFrontImage,
+        "Model Side Image": WHOLESALER_URL+e.colorOnModelSideImage,
+        "Model Back Image": WHOLESALER_URL+e.colorOnModelBackImage
       },
       "Brand Name": e.brandName
     });
@@ -63,3 +62,4 @@ const styles_map = (arr) => {
 
   return sMap;
 };
+
