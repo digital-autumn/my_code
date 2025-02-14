@@ -67,7 +67,7 @@ export const shopify_formatter = async () => {
 const add_hyphens = (str) => {return str.trim().replace(/\s+/g,'-').toLowerCase()};
 
 /**
- * Function takes in style array and then maps style elements to styleIDs.
+ * Function takes in style array and then maps style objects to styleIDs.
  * This is done for easy look up when the shopify_formatter is iterating through
  * products array. 
  * @param {*} arr  array of styles
