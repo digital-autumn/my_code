@@ -1,0 +1,13 @@
+{
+  "name": "shopify_data_formatter",
+  "version": "1.0.0",
+  "description": "Data formatter for a Shopify store",
+  "main": "main.js",
+  "type": "module",
+  "dependencies": {
+    "json-2-csv": "^5.0.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
