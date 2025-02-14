@@ -6,7 +6,7 @@ import fs from 'fs';
 
 /**
  * Sends get request to wholesaler api for product and style data
- * then organizes data into format for client's Shopify store. 
+ * then organizes data and stores it in an array. 
  * Finally converting formatted data into CSV and JSON formats.
  */
 export const shopify_formatter = async () => {
