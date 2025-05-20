@@ -7,7 +7,7 @@ const priceFormatter = (str) => {return str.substring(str.length-8, str.length).
 export const getData = async (url) => {
 
    const data = [];
-   let numProds;
+   let numProds = 0;
 
   try {
 
@@ -29,7 +29,7 @@ export const getData = async (url) => {
          price
       });
       
-      numProds = i;
+      numProds++;
    });
    
    fs.appendFile('e_commerce_data.json', JSON.stringify(data), (err) => {if (err) throw err;});
