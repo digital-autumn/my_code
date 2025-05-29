@@ -10,7 +10,7 @@ class DatabaseManager:
         self.conn = None
         self.create_database()
 
-    # creates database and widgets table
+    # creates database widgets table
     def create_database(self):
         self.conn = self.open_conn()
         self.c = self.conn.cursor()
@@ -25,10 +25,12 @@ class DatabaseManager:
         try:
             self.c.execute(self.query)
             self.conn.commit()
-            self.conn.close()
-
+            
         except sqlite3.Error as e:
             print(f'Error creating database: {e}')
+
+        finally:
+            self.conn.close()
 
     # opens connections to database
     def open_conn(self):
