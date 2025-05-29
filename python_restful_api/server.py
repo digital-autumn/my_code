@@ -41,11 +41,12 @@ class CreateWidgetHandler(tornado.web.RequestHandler):
          self.set_status(s.HTTP_STATUS_CREATED)
          self.write('Widget was successfully created')
          conn.commit()
-         c.close()
 
       except sqlite3.Error as e:
          self.set_status(s.HTTP_STATUS_INTERNAL_SERVER_ERROR)
          self.write(f'Error storing widget in the database: {e}')
+     
+      finally:
          c.close()
 
 
@@ -77,11 +78,11 @@ class ReadWidgetHandler(tornado.web.RequestHandler):
             self.set_status(s.HTTP_STATUS_OK)
             self.write(converted_to_json)
 
-         c.close()
-
       except sqlite3.Error as e:
          self.set_status(s.HTTP_STATUS_INTERNAL_SERVER_ERROR)
          self.write(f'Error reading from database: {e}')
+
+      finally:
          c.close()
 
 
@@ -107,11 +108,12 @@ class UpdateWidgetHandler(tornado.web.RequestHandler):
          self.set_status(s.HTTP_STATUS_CREATED)
          self.write('Widget was sucessfully updated')
          conn.commit()
-         c.close()
 
       except sqlite3.Error as e:
          self.set_status(s.HTTP_STATUS_INTERNAL_SERVER_ERROR)
          self.write(f'Error updating database: {e}')
+
+      finally:
          c.close()
 
 
@@ -144,11 +146,11 @@ class ListWidgetsHandler(tornado.web.RequestHandler):
             self.set_status(s.HTTP_STATUS_OK)
             self.write(converted_to_json)
 
-         c.close()
-
       except sqlite3.Error as e:
          self.set_status(s.HTTP_STATUS_INTERNAL_SERVER_ERROR)
          self.write(f'Could not get a list of widgets: {e}')
+
+      finally:
          c.close()
 
 
@@ -172,11 +174,12 @@ class DeleteWidgetHandler(tornado.web.RequestHandler):
          self.set_status(s.HTTP_STATUS_OK)
          self.write('Widget was sucessfully deleted')
          conn.commit()
-         c.close()
 
       except sqlite3.Error as e:
          self.set_status(s.HTTP_STATUS_INTERNAL_SERVER_ERROR)
          self.write(f'Error, widget was not successfully deleted: {e}')
+
+      finally:
          c.close()
 
 
