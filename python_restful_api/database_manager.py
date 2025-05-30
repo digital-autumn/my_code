@@ -15,12 +15,12 @@ class DatabaseManager:
         self.conn = self.open_conn()
         self.c = self.conn.cursor()
         self.query = """CREATE TABLE IF NOT EXISTS widgets(
-                id VARCHAR(64) PRIMARY KEY,
-                name TEXT NOT NULL,
-                num_of_parts INTEGER NOT NULL,
-                created_date TEXT NOT NULL,
-                modified_date TEXT
-            )"""
+                        id VARCHAR(64) PRIMARY KEY,
+                        name TEXT NOT NULL,
+                        num_of_parts INTEGER NOT NULL,
+                        created_date TEXT NOT NULL,
+                        modified_date TEXT
+                    )"""
 
         try:
             self.c.execute(self.query)

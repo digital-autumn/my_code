@@ -6,5 +6,4 @@ def bad_request_message()-> str:
 
 def setPort(port_num)-> int:
    Port = namedtuple('Port', ['port'])
-   PORT_NUM = Port(port_num)
-   return PORT_NUM.port
+   return Port(port_num).port

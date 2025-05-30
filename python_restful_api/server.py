@@ -71,7 +71,7 @@ class ReadWidgetHandler(tornado.web.RequestHandler):
          c.execute("SELECT * FROM widgets WHERE id=?", data)
          converted_to_json: object = json.dumps(c.fetchall())
 
-         if converted_to_json == '[]':
+         if not converted_to_json:
             self.set_status(s.HTTP_STATUS_NOT_FOUND)
             self.write(f'Widget with id: {id} does not exist in database.')
 
@@ -136,7 +136,7 @@ class ListWidgetsHandler(tornado.web.RequestHandler):
          c.execute("SELECT * FROM widgets WHERE num_of_parts=?", data)
          converted_to_json = json.dumps(c.fetchall())
 
-         if converted_to_json == '[]':
+         if not converted_to_json:
             self.set_status(s.HTTP_STATUS_NOT_FOUND)
             self.write(f'''There are no widgets with {num_of_parts} parts 
                              in the database.''')
