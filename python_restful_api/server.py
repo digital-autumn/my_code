@@ -15,7 +15,14 @@ print(f'http://localhost:{port}')
 
 class MainHandler(tornado.web.RequestHandler):
    def get(self):
-      self.write("<h1>Widget Builder</h1>")
+      try:
+         self.set_status(s.HTTP_STATUS_OK)
+         self.write("<h1>Widget Builder</h1>")
+
+      except Exception as e:
+         print(f'Something went wrong when trying to access this page: {e}')
+         self.set_status(s.HTTP_STATUS_SERVICE_NOT_AVAILABLE)
+         self.write('Webpage is not available.')
 
 # Recieves widget object from client and 
 # stores it in the database
@@ -46,7 +53,8 @@ class CreateWidgetHandler(tornado.web.RequestHandler):
 
       except sqlite3.Error as e:
          self.set_status(s.HTTP_STATUS_INTERNAL_SERVER_ERROR)
-         self.write(f'Error storing widget in the database: {e}')
+         self.write(helper.server_error_message())
+         print(f'Error storing widget in the database: {e}')
      
       finally:
          c.close()
@@ -81,7 +89,8 @@ class ReadWidgetHandler(tornado.web.RequestHandler):
 
       except sqlite3.Error as e:
          self.set_status(s.HTTP_STATUS_INTERNAL_SERVER_ERROR)
-         self.write(f'Error reading from database: {e}')
+         self.write(helper.server_error_message())
+         print(f'Error reading from database: {e}')
 
       finally:
          c.close()
@@ -111,7 +120,8 @@ class UpdateWidgetHandler(tornado.web.RequestHandler):
 
       except sqlite3.Error as e:
          self.set_status(s.HTTP_STATUS_INTERNAL_SERVER_ERROR)
-         self.write(f'Error updating database: {e}')
+         self.write(helper.server_error_message())
+         print(f'Error updating database: {e}')
 
       finally:
          c.close()
@@ -147,7 +157,8 @@ class ListWidgetsHandler(tornado.web.RequestHandler):
 
       except sqlite3.Error as e:
          self.set_status(s.HTTP_STATUS_INTERNAL_SERVER_ERROR)
-         self.write(f'Could not get a list of widgets: {e}')
+         self.write(helper.server_error_message())
+         print(f'Could not get a list of widgets: {e}')
 
       finally:
          c.close()
@@ -175,7 +186,8 @@ class DeleteWidgetHandler(tornado.web.RequestHandler):
 
       except sqlite3.Error as e:
          self.set_status(s.HTTP_STATUS_INTERNAL_SERVER_ERROR)
-         self.write(f'Error, widget was not successfully deleted: {e}')
+         self.write(helper.server_error_message())
+         print(f'Error, widget was not successfully deleted: {e}')
 
       finally:
          c.close()
