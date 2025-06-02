@@ -10,8 +10,10 @@ import server_helper as helper
 port: int = helper.setPort(3000)
 db_manager = database_manager.DatabaseManager()
 
+
 print(f'Server running on Port: {port}')
 print(f'http://localhost:{port}')
+
 
 class MainHandler(tornado.web.RequestHandler):
    def get(self):
@@ -23,6 +25,7 @@ class MainHandler(tornado.web.RequestHandler):
          print(f'Something went wrong when trying to access this page: {e}')
          self.set_status(s.HTTP_STATUS_SERVICE_NOT_AVAILABLE)
          self.write('Webpage is not available.')
+
 
 # Recieves widget object from client and 
 # stores it in the database
@@ -58,6 +61,7 @@ class CreateWidgetHandler(tornado.web.RequestHandler):
      
       finally:
          c.close()
+
 
 # gets a single widget object from database and returns it to the client in
 # JSON format
@@ -95,6 +99,7 @@ class ReadWidgetHandler(tornado.web.RequestHandler):
       finally:
          c.close()
 
+
 # updates widget name and num_of_parts
 class UpdateWidgetHandler(tornado.web.RequestHandler):
    def put(self):
@@ -125,6 +130,7 @@ class UpdateWidgetHandler(tornado.web.RequestHandler):
 
       finally:
          c.close()
+
 
 # gets a list of widget objects based on num_of_parts and returns them to the
 # client
@@ -163,6 +169,7 @@ class ListWidgetsHandler(tornado.web.RequestHandler):
       finally:
          c.close()
 
+
 # deletes widget from database based on id sent from client
 class DeleteWidgetHandler(tornado.web.RequestHandler):
    def delete(self):
@@ -192,6 +199,7 @@ class DeleteWidgetHandler(tornado.web.RequestHandler):
       finally:
          c.close()
 
+
 def make_app():
    return tornado.web.Application([
       (r"/", MainHandler),
@@ -202,10 +210,12 @@ def make_app():
       (r"/delete_widget", DeleteWidgetHandler)
    ])
 
+
 async def main():
    app = make_app()
    app.listen(port)
    await asyncio.Event().wait()
+
 
 if __name__ == "__main__":
    asyncio.run(main())
