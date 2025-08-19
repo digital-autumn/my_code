@@ -47,7 +47,7 @@ public class ArrayListImpl <T> implements IList <T>{
    public int find(T data) {
       int index = -1;
 
-      for(int i = 0; i < size; i++)
+      for (int i = 0; i < size; i++)
          if (list[i].equals(data))
             return i;
 
@@ -63,11 +63,11 @@ public class ArrayListImpl <T> implements IList <T>{
    @Override
    public void remove(int index) {
       if (index > size-1 || index < 0)
-         return;
+         throw new IndexOutOfBoundsException();
 
       list[index] = null;
 
-      for(int i = index; i < size; i++)
+      for (int i = index; i < size; i++)
          list[i] = list[i+1];
 
       size--;
@@ -75,13 +75,13 @@ public class ArrayListImpl <T> implements IList <T>{
 
    @Override
    public void clear() {
-      for(int i = 0; i < size; i++)
+      for (int i = 0; i < size; i++)
          list[i] = null;
    }
 
    @Override
    public void print() {
-      for(int i = 0; i < size; i++)
+      for (int i = 0; i < size; i++)
          System.out.println(list[i]+" ");
    }
 
