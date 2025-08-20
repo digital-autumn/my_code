@@ -2,14 +2,14 @@ package Iter;
 
 public interface IList <T> {
    /**
-    * Method adds generic data to list.
+    * Method adds generic data to end of list.
     * @param data Generic Object
     */
    public void add(T data);
 
    /**
     * Method returns generic data type at index passed to it.
-    * @param index position to add data to the list.
+    * @param index position to get data from list.
     * @return generic object type from list.
     */
    public T get(int index);
@@ -20,8 +20,8 @@ public interface IList <T> {
    public int size();
 
    /**
-    * Finds first identical object in list matches param passed
-    * to the method.
+    * Finds first identical object in list that matches param
+    * passed to the method.
     * @param data Generic object passed to method
     * @return index of element in the list.
     */
@@ -41,7 +41,7 @@ public interface IList <T> {
    public void remove(int index);
 
    /**
-    * Removes every object in the list
+    * Removes every generic object in the list.
     */
    public void clear();
 

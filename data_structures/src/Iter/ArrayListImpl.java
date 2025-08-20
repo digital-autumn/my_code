@@ -11,14 +11,14 @@ public class ArrayListImpl <T> implements IList <T>{
     * initial length 10.
     */
    @SuppressWarnings("unchecked")
-   ArrayListImpl(){
+   public ArrayListImpl() {
       this.length = 10;
       this.size = 0;
       this.list = (T[]) new Object[this.length];
    }
 
    @SuppressWarnings("unchecked")
-   ArrayListImpl(int length){
+   public ArrayListImpl(int length) {
       this.length = length;
       this.size = 0;
       this.list = (T[]) new Object[this.length];
@@ -35,6 +35,7 @@ public class ArrayListImpl <T> implements IList <T>{
 
    @Override
    public T get(int index) {
+      indexBoundsCheck(index);
       return list[index];
    }
 
@@ -57,19 +58,13 @@ public class ArrayListImpl <T> implements IList <T>{
    @Override
    public void findRemove(T data) {
       remove(find(data));
-      size--;
    }
 
    @Override
    public void remove(int index) {
-      if (index > size-1 || index < 0)
-         throw new IndexOutOfBoundsException();
-
-      list[index] = null;
-
-      for (int i = index; i < size; i++)
-         list[i] = list[i+1];
-
+      indexBoundsCheck(index);
+      shift(index);
+      list[size-1] = null;
       size--;
    }
 
@@ -82,11 +77,21 @@ public class ArrayListImpl <T> implements IList <T>{
    @Override
    public void print() {
       for (int i = 0; i < size; i++)
-         System.out.println(list[i]+" ");
+         System.out.print(list[i]+" ");
    }
 
-   private void increaseSize(){
+   private void shift(int index){
+      for (int i = index; i < size; i++)
+         list[i] = list[i+1];
+   }
+
+   private void increaseSize() {
       length*=2;
       list = Arrays.copyOf(list, length);
+   }
+
+   private void indexBoundsCheck(int index){
+      if (index > size-1 || index < 0)
+         throw new IndexOutOfBoundsException();
    }
 }
