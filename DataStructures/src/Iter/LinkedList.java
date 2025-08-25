@@ -1,6 +1,6 @@
 package Iter;
 
-public class LinkedList<E> implements IList <E> {
+public class LinkedList <E> implements IList <E> {
 
    private class Node {
 

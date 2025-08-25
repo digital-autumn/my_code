@@ -1,9 +1,10 @@
 package Map;
+import Iter.ArrayList;
 import Iter.IList;
 import Iter.LinkedList;
 import java.util.stream.IntStream;
 
-public class HashTable<K, V> implements IMap <K, V> {
+public class HashTable <K, V> implements IMap <K, V> {
 
    private int length;
    private IList [] hashTable;

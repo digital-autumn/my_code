@@ -1,7 +1,7 @@
 package Iter;
 import java.util.Arrays;
 
-public class ArrayList<E> implements IList <E> {
+public class ArrayList <E> implements IList <E> {
 
    private int size, length;
    private E [] list;
