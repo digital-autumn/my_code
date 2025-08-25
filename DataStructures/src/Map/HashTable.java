@@ -35,6 +35,11 @@ public class HashTable <K, V> implements IMap <K, V> {
    }
 
    @Override
+   public void delete(K key) {
+      hashTable[hash(key)] = null;
+   }
+
+   @Override
    public int length() {
       return length;
    }

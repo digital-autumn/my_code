@@ -24,6 +24,12 @@ public interface IMap <K, V> {
 
    /**
     *
+    * @param key
+    */
+   public void delete(K key);
+
+   /**
+    *
     * @return
     */
    public int length();
