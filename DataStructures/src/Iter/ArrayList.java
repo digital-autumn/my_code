@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class ArrayList<E> implements IList <E> {
 
    private int size, length;
-   private E[] list;
+   private E [] list;
 
    /**
     * Default constructor creates an array
