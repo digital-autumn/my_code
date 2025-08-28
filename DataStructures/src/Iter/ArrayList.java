@@ -74,6 +74,11 @@ public class ArrayList <E> implements IList <E> {
    }
 
    @Override
+   public boolean isEmpty() {
+      return Arrays.stream(list).allMatch(i -> i == null);
+   }
+
+   @Override
    public void clear() {
       for (int i = 0; i < size; i++)
          list[i] = null;
@@ -82,11 +87,6 @@ public class ArrayList <E> implements IList <E> {
 
    @Override
    public void print() {
-      if (size == 0) {
-         System.out.println("Array List is empty.");
-         return;
-      }
-
       for (int i = 0; i < size; i++)
          System.out.print(list[i]+" ");
    }

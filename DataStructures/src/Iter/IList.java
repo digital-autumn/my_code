@@ -49,6 +49,11 @@ public interface IList <E> {
    public void remove(int index);
 
    /**
+    *
+    * @return boolean value is returned if list is empty.
+    */
+   public boolean isEmpty();
+   /**
     * Removes every generic object in the list.
     */
    public void clear();

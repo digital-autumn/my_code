@@ -30,6 +30,22 @@ public interface IMap <K, V> {
 
    /**
     *
+    */
+   public void clear();
+   /**
+    *
+    * @return
+    */
+   public boolean isEmpty();
+
+   /**
+    *
+    * @param key
+    * @return
+    */
+   public boolean isEmpty(K key);
+   /**
+    *
     * @return
     */
    public int length();

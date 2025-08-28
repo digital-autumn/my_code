@@ -1,32 +1,34 @@
 package Map;
-import Iter.ArrayList;
 import Iter.IList;
 import Iter.LinkedList;
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class HashTable <K, V> implements IMap <K, V> {
 
-   private int length;
-   private IList [] hashTable;
+   private int length, size;
+   private IList [] table;
 
    public HashTable(){
-      this.length = 1000;
+      this.length = 10000;
+      size = 0;
       initializeTable();
    }
 
    public HashTable(int length){
       this.length = length;
+      size = 0;
       initializeTable();
    }
 
    @Override
    public void put(K key, V value) {
-      hashTable[hash(key)].add(value);
+      table[hash(key)].add(value);
    }
 
    @Override
    public IList get(K key) {
-      return hashTable[hash(key)];
+      return table[hash(key)];
    }
 
    @Override
@@ -36,7 +38,23 @@ public class HashTable <K, V> implements IMap <K, V> {
 
    @Override
    public void delete(K key) {
-      hashTable[hash(key)] = null;
+      table[hash(key)] = null;
+      size--;
+   }
+
+   @Override
+   public void clear() {
+
+   }
+
+   @Override
+   public boolean isEmpty() {
+      return Arrays.stream(table).allMatch(i -> i == null);
+   }
+
+   @Override
+   public boolean isEmpty(K key) {
+      return table[hash(key)].isEmpty();
    }
 
    @Override
@@ -45,8 +63,8 @@ public class HashTable <K, V> implements IMap <K, V> {
    }
 
    private void initializeTable() {
-      hashTable = IntStream.range(0, length)
-                           .mapToObj(i -> new LinkedList())
-                           .toArray(LinkedList[]::new);
+      table = IntStream.range(size, length)
+                       .mapToObj(i -> new LinkedList())
+                       .toArray(LinkedList[]::new);
    }
 }

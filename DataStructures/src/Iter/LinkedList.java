@@ -97,6 +97,11 @@ public class LinkedList <E> implements IList <E> {
    }
 
    @Override
+   public boolean isEmpty() {
+      return head == null && tail == null;
+   }
+
+   @Override
    public void clear() {
       head = null;
       tail = null;
@@ -105,11 +110,6 @@ public class LinkedList <E> implements IList <E> {
 
    @Override
    public void print() {
-      if (head == null) {
-         System.out.println("Linked List is empty.");
-         return;
-      }
-
       Node current = head;
       for (int i = 0; i < size; i++){
          System.out.print(current.data+" ");
