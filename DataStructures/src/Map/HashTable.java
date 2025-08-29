@@ -6,18 +6,16 @@ import java.util.stream.IntStream;
 
 public class HashTable <K, V> implements IMap <K, V> {
 
-   private int length, size;
+   private int length;
    private IList [] table;
 
    public HashTable(){
       this.length = 10000;
-      size = 0;
       initializeTable();
    }
 
    public HashTable(int length){
       this.length = length;
-      size = 0;
       initializeTable();
    }
 
@@ -39,12 +37,11 @@ public class HashTable <K, V> implements IMap <K, V> {
    @Override
    public void delete(K key) {
       table[hash(key)] = null;
-      size--;
    }
 
    @Override
    public void clear() {
-
+      initializeTable();
    }
 
    @Override
@@ -63,7 +60,7 @@ public class HashTable <K, V> implements IMap <K, V> {
    }
 
    private void initializeTable() {
-      table = IntStream.range(size, length)
+      table = IntStream.range(0, length)
                        .mapToObj(i -> new LinkedList())
                        .toArray(LinkedList[]::new);
    }
