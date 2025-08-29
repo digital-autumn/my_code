@@ -6,16 +6,12 @@ import java.util.stream.IntStream;
 
 public class HashTable <K, V> implements IMap <K, V> {
 
-   private int length;
+   private int length, size;
    private IList [] table;
 
    public HashTable(){
       this.length = 10000;
-      initializeTable();
-   }
-
-   public HashTable(int length){
-      this.length = length;
+      size = 0;
       initializeTable();
    }
 
@@ -60,7 +56,7 @@ public class HashTable <K, V> implements IMap <K, V> {
    }
 
    private void initializeTable() {
-      table = IntStream.range(0, length)
+      table = IntStream.range(size, length)
                        .mapToObj(i -> new LinkedList())
                        .toArray(LinkedList[]::new);
    }
