@@ -37,6 +37,7 @@ public class HashTable <K, V> implements IMap <K, V> {
 
    @Override
    public void clear() {
+      size = 0;
       initializeTable();
    }
 
