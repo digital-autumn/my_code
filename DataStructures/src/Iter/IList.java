@@ -53,6 +53,7 @@ public interface IList <E> {
     * @return boolean value is returned if list is empty.
     */
    public boolean isEmpty();
+
    /**
     * Removes every generic object in the list.
     */

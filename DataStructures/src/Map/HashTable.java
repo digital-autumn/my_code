@@ -18,6 +18,7 @@ public class HashTable <K, V> implements IMap <K, V> {
    @Override
    public void put(K key, V value) {
       table[hash(key)].add(value);
+      size++;
    }
 
    @Override
@@ -33,6 +34,7 @@ public class HashTable <K, V> implements IMap <K, V> {
    @Override
    public void delete(K key) {
       table[hash(key)] = null;
+      size--;
    }
 
    @Override

@@ -34,13 +34,11 @@ public class ArrayList <E> implements IList <E> {
 
    @Override
    public void add(int index, E data){
-      indexBoundsCheck(index);
       list[index] = data;
    }
 
    @Override
    public E get(int index) {
-      indexBoundsCheck(index);
       return list[index];
    }
 
@@ -67,7 +65,6 @@ public class ArrayList <E> implements IList <E> {
 
    @Override
    public void remove(int index) {
-      indexBoundsCheck(index);
       shift(index);
       list[size-1] = null;
       size--;
@@ -99,10 +96,5 @@ public class ArrayList <E> implements IList <E> {
    private void increaseLength() {
       length*=2;
       list = Arrays.copyOf(list, length);
-   }
-
-   private void indexBoundsCheck(int index){
-      if (index > size-1 || index < 0)
-         throw new IndexOutOfBoundsException();
    }
 }

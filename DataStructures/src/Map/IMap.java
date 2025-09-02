@@ -15,6 +15,7 @@ public interface IMap <K, V> {
     * @return
     */
    public IList get(K key);
+   
    /**
     *
     * @param key
@@ -32,6 +33,7 @@ public interface IMap <K, V> {
     *
     */
    public void clear();
+
    /**
     *
     * @return
@@ -44,6 +46,7 @@ public interface IMap <K, V> {
     * @return
     */
    public boolean isEmpty(K key);
+
    /**
     *
     * @return

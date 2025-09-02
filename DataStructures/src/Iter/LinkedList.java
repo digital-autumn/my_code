@@ -34,9 +34,7 @@ public class LinkedList <E> implements IList <E> {
    }
 
    @Override
-   public void add(int index, E data) {
-
-   }
+   public void add(int index, E data) {}
 
    @Override
    public E get(int index) {
