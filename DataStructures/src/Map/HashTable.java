@@ -45,7 +45,7 @@ public class HashTable <K, V> implements IMap <K, V> {
 
    @Override
    public boolean isEmpty() {
-      return Arrays.stream(table).allMatch(i -> i == null);
+      return Arrays.stream(table).allMatch(i -> i.isEmpty());
    }
 
    @Override
