@@ -63,4 +63,6 @@ public interface IList <E> {
     * Prints all the contents of the list.
     */
    public void print();
+
+   public void printReverse();
 }

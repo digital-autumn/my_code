@@ -85,7 +85,13 @@ public class ArrayList <E> implements IList <E> {
    @Override
    public void print() {
       for (int i = 0; i < size; i++)
-         System.out.print(list[i]+" ");
+         System.out.println(list[i]+" ");
+   }
+
+   @Override
+   public void printReverse() {
+      for (int i = size-1; i >= 0; i--)
+         System.out.println(list[i]+" ");
    }
 
    private void shift(int index){

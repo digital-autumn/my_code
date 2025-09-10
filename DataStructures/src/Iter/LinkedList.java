@@ -5,7 +5,7 @@ public class LinkedList <E> implements IList <E> {
    private class Node {
 
       E data;
-      Node next;
+      Node next, prev;
 
       Node(E data){
          this.data = data;
@@ -29,6 +29,7 @@ public class LinkedList <E> implements IList <E> {
       }
 
       tail.next = new Node(data);
+      tail.next.prev = tail;
       tail = tail.next;
       size++;
    }
@@ -110,8 +111,16 @@ public class LinkedList <E> implements IList <E> {
    public void print() {
       Node current = head;
       for (int i = 0; i < size; i++){
-         System.out.print(current.data+" ");
+         System.out.println(current.data+" ");
          current = current.next;
+      }
+   }
+
+   public void printReverse(){
+      Node current = tail;
+      for (int i = 0; i < size; i++){
+         System.out.println(current.data+" ");
+         current = current.prev;
       }
    }
 
