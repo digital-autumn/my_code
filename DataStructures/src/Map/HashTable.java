@@ -33,7 +33,7 @@ public class HashTable <K, V> implements IMap <K, V> {
 
    @Override
    public void delete(K key) {
-      table[hash(key)] = null;
+      table[hash(key)].clear;
       size--;
    }
 

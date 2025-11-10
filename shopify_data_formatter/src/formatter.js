@@ -53,9 +53,9 @@ export const shopify_formatter = async () => {
     });
   });
 
-  fs.writeFile(`${EXPORTS_PATH}.csv`, converter.json2csv(formatted_data), (err) => {if (err) throw err;});
+  fs.writeFile(`${EXPORTS_PATH}.csv`, converter.json2csv(formatted_data), (err) => { if (err) throw err; });
 
-  fs.writeFile(`${EXPORTS_PATH}.json`, JSON.stringify(formatted_data), (err) => {if (err) throw err;}); 
+  fs.writeFile(`${EXPORTS_PATH}.json`, JSON.stringify(formatted_data), (err) => { if (err) throw err; }); 
 };
 
 /**
@@ -64,7 +64,7 @@ export const shopify_formatter = async () => {
  * @param {*} str product title
  * @returns hyphenated string
  */
-const add_hyphens = (str) => {return str.trim().replace(/\s+/g,'-').toLowerCase()};
+const add_hyphens = (str) => str.trim().replace(/\s+/g,'-').toLowerCase();
 
 /**
  * Function takes in style array and then maps style objects to styleIDs.
@@ -76,8 +76,6 @@ const add_hyphens = (str) => {return str.trim().replace(/\s+/g,'-').toLowerCase(
 const styles_map = (arr) => {
 
   const sMap = {};
-  arr.map((e) => {sMap[e.styleID] = e;});
-
-  return sMap;
+  return arr.map((e) => { sMap[e.styleID] = e; });
 };
 
